@@ -1,26 +1,79 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --white: #ffffff;
+  --black: #171717;
+  font-size: 10px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  font-size: 10px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+body {
+  color: var(--white);
+  font-family: var(--font-mate), Arial, Helvetica, sans-serif;
+}
+
+nextjs-portal {
+  display: none !important;
+}
+
+#home-landing-page:after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.5;
+  background-size: cover;
+}
+
+p {
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 4.8rem;
+  line-height: 60px;
+}
+h2 {
+  font-size: 2.8rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 7rem;
+  }
+  h2 {
+    font-size: 3.2rem;
+  }
+  h3 {
+    font-size: 2.5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 10rem;
+  }
+  
+  h2 {
+    font-size: 4.8rem;
+  }
+
+  h3 {
+    font-size: 3rem;
+  }
+
 }

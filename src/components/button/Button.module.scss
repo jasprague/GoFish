@@ -1,0 +1,19 @@
+.button {
+    padding: 10px 20;
+    background-color: #E98F35;
+    border-radius: 12px;
+    font-size: 24px;
+    z-index: 100;
+    opacity: 1;
+    width: 100%;
+    text-align: center;
+
+    @media screen and (min-width: 768px) {
+       width: auto; 
+    }
+}
+
+.alt {
+    background-color: #114562;
+}
+
