@@ -2,6 +2,7 @@
 
 import HomeBanner from "@/components/banners/homeBanner/HomeBanner";
 import { useState, useEffect } from 'react';
+import Navbar from "@/components/navigation/Navbar";
 
 export default function Home() {
 
@@ -22,7 +23,8 @@ export default function Home() {
   }, []);
 
   return (
-    <main id="home-landing-page" className="h-screen w-screen max-w-none bg-[#114562] overflow-hidden relative">
+    <main id="home-landing-page" className="h-screen w-screen max-w-none bg-[#114562] relative overflow-hidden flex flex-col">
+      <Navbar />
       {!videoLoaded ? (
         <div className="absolute w-screen h-screen bg-cover bg-center"></div>
       ) : (
@@ -30,7 +32,7 @@ export default function Home() {
           autoPlay
           loop
           muted
-          className="absolute top-0 left-0 min-w-full min-h-full object-cover"
+          className="absolute top-0 left-0 min-w-full h-full object-cover"
         >
           <source src="go-fish-background-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.

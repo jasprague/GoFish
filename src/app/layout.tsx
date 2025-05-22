@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Mate_SC } from "next/font/google";
-import Navbar from "@/components/navigation/Navbar";
+
 import "./globals.css";
 
 const mateSC = Mate_SC({
@@ -25,7 +25,7 @@ export default function RootLayout({
       <body
         className={`${mateSC.className}`}
       >
-        <Navbar />
+
         {children}
       </body>
     </html>
