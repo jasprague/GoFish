@@ -1,8 +1,8 @@
 'use client';
 
 import HomeBanner from "@/components/banners/homeBanner/HomeBanner";
-import { useState, useEffect } from 'react';
 import Navbar from "@/components/navigation/Navbar";
+import { useState, useEffect } from 'react';
 
 export default function Home() {
 
@@ -23,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main id="home-landing-page" className="h-screen w-screen max-w-none bg-[#114562] relative overflow-hidden flex flex-col">
+    <main id="home-landing-page" className=" w-screen min-h-screen bg-[#114562] relative flex flex-col">
       <Navbar />
       {!videoLoaded ? (
         <div className="absolute w-screen h-screen bg-cover bg-center"></div>
