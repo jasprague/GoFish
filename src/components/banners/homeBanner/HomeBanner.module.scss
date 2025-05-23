@@ -7,7 +7,7 @@ gap: 20px;
 z-index: 50;
 padding: 80px 20px 80px 20px;
 bottom: 0px;
-backdrop-filter: blur(2px);
+
 width: 100%;
 background: #242424a6;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
@@ -24,6 +24,7 @@ animation: fadeIn 1s ease-in-out forwards; /* Apply the animation */
   top: 100px;
   left: 50px;
   gap: 40px;
+  backdrop-filter: blur(2px);
   mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 100%) 20%, black 100%);
 -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 100%) 20%, black 100%);
   
