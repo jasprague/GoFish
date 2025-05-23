@@ -7,6 +7,7 @@ export default function HomeBanner() {
         <div className={styles.HomeBanner}>
             <h1><span className={styles.headingTitle}>Go Fish</span>, Bud.</h1>
             <h3 className="pb-5">The online job board for the fishing industry.</h3>
+            <p>Fill out the form below to get updates on the development of this application.</p>
             {!isInBeta &&
                 <div className="flex gap-10 flex-wrap justify-start">
                 <Button text="Find a Job" link="/sign-up" variant="default" />
@@ -20,7 +21,7 @@ export default function HomeBanner() {
                     <input type="name" name="name" id="name" placeholder="Enter Your Name" className="p-5" required />
                     <label htmlFor="email" className="sr-only">Enter Your Email</label>
                     <input type="email" name="email" id="email" placeholder="Enter Your Email" className="p-5" required />
-                    <button className="p-5 bg-[#E98F35] button" type="submit">Join The Beta</button>
+                    <button className="p-5 bg-[#E98F35] button" type="submit">Send It</button>
                 </form>
                 </div>
             }
