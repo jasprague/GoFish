@@ -7,7 +7,7 @@ export default function HomeBanner() {
         <div className={styles.HomeBanner}>
             <h1><span className={styles.headingTitle}>Go Fish</span>, Bud.</h1>
             <h3 className="pb-5">The online job board for the fishing industry.</h3>
-            <p>Fill out the form below to get updates on the development of this application.</p>
+            <p>Fill out the form below to get updates and test new features.</p>
             {!isInBeta &&
                 <div className="flex gap-10 flex-wrap justify-start">
                 <Button text="Find a Job" link="/sign-up" variant="default" />
