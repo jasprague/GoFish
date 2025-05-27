@@ -24,8 +24,8 @@ animation: fadeIn 1s ease-in-out forwards; /* Apply the animation */
   left: 50px;
   gap: 40px;
   backdrop-filter: blur(2px);
-  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 100%) 20%, black 100%);
--webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 100%) 20%, black 100%);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 100%) 10%, black 100%);
+-webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 100%) 10%, black 100%);
   
 }
 }

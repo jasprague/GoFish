@@ -6,6 +6,8 @@
 :root {
   --white: #ffffff;
   --black: #171717;
+  --primary:#E98F35;
+  --secondary: #114562;
   font-size: 10px;
 }
 
@@ -17,6 +19,7 @@ html {
 body {
   color: var(--white);
   font-family: var(--font-mate), Arial, Helvetica, sans-serif;
+  background-color: var(--secondary);
 }
 
 nextjs-portal {
