@@ -125,7 +125,7 @@ export default function HomeBanner() {
           </button>
         </form>
         {error && <p className="text-red-500 mt-2">{error}</p>}
-        {success && <p className="text-green-500 mt-2">Thank you for joining the beta!</p>}
+        {success && <p className="text-green-500 mt-2">Message received -  We&apos;ll email you when we are up and running. Thanks!</p>}
       </div>
             }
         </div>
