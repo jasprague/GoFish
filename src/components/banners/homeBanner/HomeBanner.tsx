@@ -7,7 +7,7 @@ import Button from '@/components/button/Button';
 export default function HomeBanner() {
     const isInBeta = true;
 
-    const [formData, setFormData] = useState({ name: '', email: '' });
+    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '' });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -23,8 +23,8 @@ export default function HomeBanner() {
       setSuccess(false);
   
       // Client-side validation
-      if (!formData.name.trim() || !formData.email.trim()) {
-        setError('Both name and email are required.');
+      if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim()) {
+        setError('Name and email are required.');
         return;
       }
   
@@ -46,7 +46,7 @@ export default function HomeBanner() {
   
         if (response.ok) {
           setSuccess(true);
-          setFormData({ name: '', email: '' }); // Reset form
+          setFormData({ firstName: '', lastName: '', email: '' }); // Reset form
         } else {
           const data = await response.json();
           setError(data.message || 'Something went wrong. Please try again.');
@@ -64,7 +64,7 @@ export default function HomeBanner() {
         <div className={styles.HomeBanner}>
             <h1><span className={styles.headingTitle}>Go Fish</span>, Bud.</h1>
             <h3 className="pb-5">The online job board for the fishing industry.</h3>
-            <p>Fill out the form below to get updates and test new features.</p>
+            <p>Fill out the form below to be updated when our app is live!</p>
             {!isInBeta &&
                 <div className="flex gap-10 flex-wrap justify-start">
                 <Button text="Find a Job" link="/sign-up" variant="default" />
@@ -74,19 +74,35 @@ export default function HomeBanner() {
             {isInBeta &&
   <div className="flex w-full flex-wrap justify-start">
         <form className="flex w-full flex-col gap-5" onSubmit={handleSubmit}>
-          <label htmlFor="name" className="sr-only">
-            Enter Your Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Enter Your Name"
-            className="p-5 rounded-md"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <div className="flex justify-between">
+            <label htmlFor="firstName" className="sr-only">
+              Enter Your First Name
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              id="first-name"
+              placeholder="First Name"
+              className={styles.halfInput + ' p-5 rounded-md'}
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+
+            <label htmlFor="last-name" className="sr-only">
+              Enter Your First Name
+            </label>
+            <input
+              type="text"
+              name="lastName"
+              id="last-name"
+              placeholder="Last Name"
+              className={styles.halfInput + ' p-5 rounded-md'}
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
           <label htmlFor="email" className="sr-only">
             Enter Your Email
           </label>
@@ -94,7 +110,7 @@ export default function HomeBanner() {
             type="email"
             name="email"
             id="email"
-            placeholder="Enter Your Email"
+            placeholder="Your Email"
             className="p-5 rounded-md"
             value={formData.email}
             onChange={handleChange}

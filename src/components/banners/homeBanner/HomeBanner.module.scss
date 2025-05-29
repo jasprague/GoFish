@@ -34,6 +34,10 @@ animation: fadeIn 1s ease-in-out forwards; /* Apply the animation */
   color: #E98F35;
 }
 
+.halfInput {
+  width: 48%;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

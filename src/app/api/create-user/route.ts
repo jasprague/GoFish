@@ -4,16 +4,27 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(req: NextRequest) {
 console.log('DATABASE_URL:', process.env.DATABASE_URL);
   const body = await req.json();
-  const { name, email } = body;
+  const { firstName, lastName, email } = body;
 
-  if (!name || !email) {
+  if (!firstName || !lastName || !email) {
     return NextResponse.json({ message: 'Name and email are required' }, { status: 400 });
   }
 
   try {
+    // Check if the email already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return NextResponse.json({ message: 'This email is already registered.' }, { status: 409 }); // 409 Conflict
+    }
+
+
     const user = await prisma.user.create({
       data: {
-        name,
+        firstName,
+        lastName,
         email,
       },
     });
