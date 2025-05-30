@@ -10,7 +10,7 @@ export default function Home() {
           autoPlay
           loop
           muted
-          poster="go-fish-banner-poster.png"
+          poster="homepage-poster-image-min.png"
           className="absolute top-0 left-0 min-w-full h-full object-cover"
         >
           <source src="go-fish-background-video.mp4" type="video/mp4" />
