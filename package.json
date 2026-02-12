@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:migrate": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^6.8.2",
@@ -24,6 +30,7 @@
     "eslint-config-next": "15.2.1",
     "prisma": "^6.8.2",
     "sass": "^1.89.0",
+    "supabase": "^2.76.8",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
