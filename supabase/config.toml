@@ -63,6 +63,10 @@ enable_anonymous_sign_ins = false
 enable_signup = true
 double_confirm_changes = true
 enable_confirmations = false
+# Enable OTP / magic link
+enable_otp = true
+otp_length = 6
+otp_expiry = 300
 
 [auth.external.apple]
 enabled = false
@@ -71,7 +75,16 @@ enabled = false
 enabled = false
 
 [auth.external.google]
-enabled = false
+enabled = true
+client_id = "env(GOOGLE_CLIENT_ID)"
+secret = "env(GOOGLE_CLIENT_SECRET)"
+redirect_uri = "http://127.0.0.1:54331/auth/v1/callback"
+
+[auth.external.facebook]
+enabled = true
+client_id = "env(FACEBOOK_CLIENT_ID)"
+secret = "env(FACEBOOK_CLIENT_SECRET)"
+redirect_uri = "http://127.0.0.1:54331/auth/v1/callback"
 
 [analytics]
 enabled = false

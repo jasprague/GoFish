@@ -10,17 +10,15 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    // Check if the email already exists
-    const existingUser = await prisma.user.findUnique({
+    const existing = await prisma.betaSignup.findUnique({
       where: { email },
     });
 
-    if (existingUser) {
-      return NextResponse.json({ message: 'This email is already registered.' }, { status: 409 }); // 409 Conflict
+    if (existing) {
+      return NextResponse.json({ message: 'This email is already registered.' }, { status: 409 });
     }
 
-
-    const user = await prisma.user.create({
+    const signup = await prisma.betaSignup.create({
       data: {
         firstName,
         lastName,
@@ -28,9 +26,9 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return NextResponse.json({ message: 'User created successfully!', user }, { status: 200 });
+    return NextResponse.json({ message: 'User created successfully!', user: signup }, { status: 200 });
   } catch (error) {
-    console.error('Error creating user:', error);
+    console.error('Error creating beta signup:', error);
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }
