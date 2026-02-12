@@ -4,15 +4,16 @@ import styles from './Button.module.scss';
 interface ButtonProps {
     text: string;
     link: string;
-    type?: "submit";
-    variant?: "default" | "alt"; // Optional variant
+    variant?: "default" | "alt";
   }
 
-export default function Button({text, type, link, variant = "default"}:ButtonProps) {
-  return (
-    <>        
-        <Link href={`${link}`} type={type === 'submit' ? 'submit' : ''} className={`${styles.button} ${variant === 'alt' ? `${styles.alt}` : ''}`}>{text}</Link>
-    </>
+export default function Button({text, link, variant = "default"}:ButtonProps) {
+  const className = `${styles.button} ${variant === 'alt' ? styles.alt : ''}`
+  const isExternal = link.startsWith('http://') || link.startsWith('https://')
 
-  );
+  if (isExternal) {
+    return <a href={link} target="_blank" rel="noopener noreferrer" className={className}>{text}</a>
+  }
+
+  return <Link href={link} className={className}>{text}</Link>
 }

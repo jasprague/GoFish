@@ -75,7 +75,7 @@ export default function HomeBanner() {
   <div className="flex w-full flex-wrap justify-start">
         <form className="flex w-full flex-col gap-5" onSubmit={handleSubmit}>
           <div className="flex justify-between">
-            <label htmlFor="firstName" className="sr-only">
+            <label htmlFor="first-name" className="sr-only">
               Enter Your First Name
             </label>
             <input
@@ -90,7 +90,7 @@ export default function HomeBanner() {
             />
 
             <label htmlFor="last-name" className="sr-only">
-              Enter Your First Name
+              Enter Your Last Name
             </label>
             <input
               type="text"

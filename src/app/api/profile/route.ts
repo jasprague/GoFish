@@ -17,6 +17,15 @@ function parseRole(val: unknown): UserRole | null {
   return null
 }
 
+const PROFILE_SELECT = {
+  id: true,
+  email: true,
+  firstName: true,
+  lastName: true,
+  role: true,
+  createdAt: true,
+} as const
+
 /// GET /api/profile — returns the current user's profile
 export async function GET() {
   const supabase = await createClient()
@@ -28,6 +37,7 @@ export async function GET() {
 
   const profile = await prisma.profile.findUnique({
     where: { id: user.id },
+    select: PROFILE_SELECT,
   })
 
   return NextResponse.json({ profile })
@@ -64,6 +74,7 @@ export async function POST(req: Request) {
       lastName,
       role,
     },
+    select: PROFILE_SELECT,
   })
 
   return NextResponse.json({ profile })
