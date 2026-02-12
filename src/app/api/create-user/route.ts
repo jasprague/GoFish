@@ -2,7 +2,6 @@ import { prisma } from '../../../lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-console.log('DATABASE_URL:', process.env.DATABASE_URL);
   const body = await req.json();
   const { firstName, lastName, email } = body;
 
