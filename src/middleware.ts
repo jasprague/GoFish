@@ -42,8 +42,13 @@ export async function middleware(request: NextRequest) {
     (path) => request.nextUrl.pathname === path || request.nextUrl.pathname.startsWith(`${path}/`)
   )
 
-  // Redirect unauthenticated users away from protected routes
+  // Block unauthenticated users from protected routes
   if (!user && !isPublic) {
+    // API routes get a 401 JSON response, not a redirect
+    if (request.nextUrl.pathname.startsWith('/api')) {
+      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+    }
+
     const url = request.nextUrl.clone()
     url.pathname = '/auth/login'
     return NextResponse.redirect(url)
