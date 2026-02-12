@@ -5,12 +5,16 @@ ALTER TABLE "User" RENAME TO "BetaSignup";
 ALTER INDEX "User_email_key" RENAME TO "BetaSignup_email_key";
 ALTER INDEX "User_pkey" RENAME TO "BetaSignup_pkey";
 
+-- Create UserRole enum
+CREATE TYPE "UserRole" AS ENUM ('CAPTAIN', 'CREW');
+
 -- Create Profile table for authenticated users (linked to Supabase auth.users)
 CREATE TABLE "Profile" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "firstName" VARCHAR(255),
     "lastName" VARCHAR(255),
+    "role" "UserRole",
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

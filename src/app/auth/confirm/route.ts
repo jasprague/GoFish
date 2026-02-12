@@ -2,11 +2,18 @@ import { type EmailOtpType } from '@supabase/supabase-js'
 import { NextResponse, type NextRequest } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
+function safeRedirectPath(next: string | null): string {
+  if (!next || !next.startsWith('/') || next.startsWith('//')) {
+    return '/'
+  }
+  return next
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType | null
-  const next = searchParams.get('next') ?? '/'
+  const next = safeRedirectPath(searchParams.get('next'))
 
   if (token_hash && type) {
     const supabase = await createClient()
@@ -20,6 +27,5 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  // Redirect to login if verification failed
   return NextResponse.redirect(new URL('/auth/login', request.url))
 }

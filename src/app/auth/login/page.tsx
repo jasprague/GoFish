@@ -22,6 +22,18 @@ export default function LoginPage() {
     setError('')
   }
 
+  const syncProfile = async (overrides?: { firstName?: string; lastName?: string }) => {
+    try {
+      await fetch('/api/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(overrides ?? {}),
+      })
+    } catch {
+      // Profile sync is best-effort; auth still succeeds
+    }
+  }
+
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     resetMessages()
@@ -35,6 +47,7 @@ export default function LoginPage() {
     if (error) {
       setError(error.message)
     } else {
+      await syncProfile()
       window.location.href = '/'
     }
 
@@ -46,7 +59,7 @@ export default function LoginPage() {
     resetMessages()
     setLoading(true)
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -59,8 +72,9 @@ export default function LoginPage() {
 
     if (error) {
       setError(error.message)
-    } else {
-      setMessage('Check your email for a confirmation link.')
+    } else if (data.user) {
+      await syncProfile({ firstName, lastName })
+      setMessage('Account created! Check your email for a confirmation link.')
     }
 
     setLoading(false)

@@ -32,13 +32,18 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
+  // Public routes that don't require authentication
+  const publicPaths = [
+    '/',
+    '/auth',
+    '/api/create-user', // beta signup endpoint
+  ]
+  const isPublic = publicPaths.some(
+    (path) => request.nextUrl.pathname === path || request.nextUrl.pathname.startsWith(`${path}/`)
+  )
+
   // Redirect unauthenticated users away from protected routes
-  if (
-    !user &&
-    !request.nextUrl.pathname.startsWith('/auth') &&
-    !request.nextUrl.pathname.startsWith('/api') &&
-    request.nextUrl.pathname !== '/'
-  ) {
+  if (!user && !isPublic) {
     const url = request.nextUrl.clone()
     url.pathname = '/auth/login'
     return NextResponse.redirect(url)

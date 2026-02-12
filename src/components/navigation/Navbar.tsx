@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { User } from '@supabase/supabase-js'
 import Button from '../button/Button'
 
 const Navbar = () => {
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Navbar = () => {
     })
 
     return () => subscription.unsubscribe()
-  }, [supabase.auth])
+  }, [supabase])
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()

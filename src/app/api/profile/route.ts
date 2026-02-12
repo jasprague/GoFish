@@ -1,6 +1,21 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
+import { UserRole } from '@/generated/prisma'
+
+const MAX_NAME_LENGTH = 255
+
+function sanitizeString(val: unknown, maxLength: number): string | null {
+  if (typeof val !== 'string') return null
+  const trimmed = val.trim()
+  if (trimmed.length === 0) return null
+  return trimmed.slice(0, maxLength)
+}
+
+function parseRole(val: unknown): UserRole | null {
+  if (val === 'CAPTAIN' || val === 'CREW') return val
+  return null
+}
 
 /// GET /api/profile — returns the current user's profile
 export async function GET() {
@@ -23,26 +38,31 @@ export async function POST(req: Request) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  if (!user) {
+  if (!user || !user.email) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
   }
 
-  const body = await req.json()
-  const firstName = body.firstName ?? user.user_metadata?.first_name ?? null
-  const lastName = body.lastName ?? user.user_metadata?.last_name ?? null
+  const body = await req.json().catch(() => ({}))
+  const firstName = sanitizeString(body.firstName, MAX_NAME_LENGTH)
+    ?? sanitizeString(user.user_metadata?.first_name, MAX_NAME_LENGTH)
+  const lastName = sanitizeString(body.lastName, MAX_NAME_LENGTH)
+    ?? sanitizeString(user.user_metadata?.last_name, MAX_NAME_LENGTH)
+  const role = parseRole(body.role)
 
   const profile = await prisma.profile.upsert({
     where: { id: user.id },
     update: {
       firstName,
       lastName,
-      email: user.email!,
+      email: user.email,
+      ...(role !== null && { role }),
     },
     create: {
       id: user.id,
-      email: user.email!,
+      email: user.email,
       firstName,
       lastName,
+      role,
     },
   })
 
