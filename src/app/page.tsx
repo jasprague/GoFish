@@ -4,12 +4,14 @@ import Navbar from "@/components/navigation/Navbar";
 export default function Home() {
 
   return (
-    <main id="home-landing-page" className=" w-screen min-h-screen bg-[#114562] relative flex flex-col">
+    <main id="home-landing-page" className="w-full min-h-screen bg-[#114562] relative flex flex-col">
       <Navbar />
         <video
           autoPlay
           loop
           muted
+          playsInline
+          preload="none"
           poster="homepage-poster-image-min.png"
           className="absolute top-0 left-0 min-w-full h-full object-cover"
         >
